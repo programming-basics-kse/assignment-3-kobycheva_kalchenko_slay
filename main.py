@@ -26,3 +26,4 @@ args = parser.parse_args()
 if __name__ == '__main__':
     if args.medals:
         top_10_medals(categories, rows, args.medals[0], args.medals[1])
+
