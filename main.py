@@ -30,10 +30,6 @@ if __name__ == '__main__':
     elif args.total:
         result = total(categories, rows, args.total[0])
 
-
-
     if args.output:
         with open(args.output[0], 'w') as results_file:
             results_file.write(result)
-
-

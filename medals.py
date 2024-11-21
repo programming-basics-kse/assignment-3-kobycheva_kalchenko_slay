@@ -22,10 +22,10 @@ def check_year(rows, year):
 def check_country(rows, team):
     valid_teams = {row[6] for row in rows}
     valid_nocs = {row[7] for row in rows}
-    if team not in (valid_teams or valid_nocs):
-        print('This country does not exict')
-        return False
-    return True
+    if team in valid_teams or team in valid_nocs:
+        return True
+    print('This country does not exist')
+    return False
 
 def top_10_medals(header, rows, team, year):
     NAME = header.index('Name')
