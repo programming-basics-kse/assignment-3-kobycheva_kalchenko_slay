@@ -1,19 +1,16 @@
+import csv
+from lib2to3.pgen2.tokenize import group
 
 def open_file():
-    with open("Olympic Athletes - athlete_events.tsv", "r") as file:
-        heading = next(file).replace('\n', '')
-        heading = heading.split('\t')
-        next_line = file.readline()
-        lines = []
-        while next_line:
-            split = next_line.split('\t')
-            lines.append(split)
-            next_line = file.readline()
-        for line in lines:
-            line[-1] = line[-1].replace('\n','')
-    return heading, lines
+    with open("athlete_events.csv", "r") as file:
+        reader = csv.reader(file)
+        rows = []
+        header = next(reader)
+        for row in reader:
+            rows.append(row)
+    return header, rows
 
 categories, rows = open_file()
 
 if __name__ == '__main__':
-    print(categories, rows[0])
+    print(categories, rows[81])
