@@ -10,7 +10,7 @@ def count_medals(medals_dict):
         else:
             total_bronze += medals_dict[name]['Bronze']
     print(f'Total gold medals for country: {total_gold}, silver: {total_silver}, bronze: {total_bronze}')
-    return f'Total gold medals for country: {total_gold}, silver: {total_silver}, bronze: {total_bronze}'
+    return total_gold+total_silver+total_bronze, f'Total gold medals for country: {total_gold}, silver: {total_silver}, bronze: {total_bronze}'
 
 def check_year(rows, year):
     valid_years = {row[9] for row in rows}
@@ -36,7 +36,6 @@ def top_10_medals(header, rows, team, year):
     MEDAL = header.index('Medal')
     sportsman_total = {}
     sportsman_medals = {}
-    number_of_medals = 0
     if not check_year(rows, year) or not check_country(rows, team):
         exit()
     for row in rows:
@@ -52,10 +51,10 @@ def top_10_medals(header, rows, team, year):
                 if row[NAME] not in sportsman_total:
                     sportsman_total[row[NAME]] = 0
                 sportsman_total[row[NAME]] += 1
-                number_of_medals += 1
+
+    number_of_medals, total_count_output = count_medals(sportsman_medals)
     if number_of_medals < 10:
-        print(f'Only {number_of_medals} of this country')
-        exit()
+        return f'Only {number_of_medals} medals of this country'
     top_10 = sorted(sportsman_total.items(), key=lambda x: x[1], reverse=True)[:10]
     output = f"Top 10 sportsmen for {team} in {year}:\n"
     print(f"Top 10 sportsmen for {team} in {year}:")
@@ -65,5 +64,6 @@ def top_10_medals(header, rows, team, year):
         for key, value in sportsman_medals[result[0]].items():
             print(f'   {key}: {value}')
             output += f"{key}: {value}\n"
-    output += count_medals(sportsman_medals)
+    print(total_count_output)
+    output += total_count_output
     return output
