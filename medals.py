@@ -20,7 +20,6 @@ def top_10_medals(header, rows, team, year):
                     sportsman_total[row[NAME]] = 0
                 sportsman_total[row[NAME]] += 1
     top_10 = sorted(sportsman_total.items(), key=lambda x: x[1], reverse=True)[:10]
-
     print(f"Top 10 sportsmen for {team} in {year}:")
     for tuple in top_10:
         print(f'{top_10.index(tuple) + 1}) {tuple[0]},  {sportsman_medals[tuple[0]]['discipline']},  Gold: {sportsman_medals[tuple[0]]['Gold']},  Silver: {sportsman_medals[tuple[0]]['Silver']} ,  Bronze: {sportsman_medals[tuple[0]]['Bronze']}')
