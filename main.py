@@ -14,11 +14,8 @@ def open_file():
 
 categories, rows = open_file()
 
-
 parser = argparse.ArgumentParser()
-
 group = parser.add_mutually_exclusive_group(required=True)
-
 group.add_argument('--medals', nargs=2, help='top 10 medalists of selected country')
 parser.add_argument('--output', nargs=1, type=str, help='file to save output')
 args = parser.parse_args()

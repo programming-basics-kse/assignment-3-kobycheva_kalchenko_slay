@@ -8,7 +8,6 @@ def top_10_medals(header, rows, team, year):
     MEDAL = header.index('Medal')
 
     sportsman_dict = {}
-
     for row in rows:
         if (team == row[TEAM] or team == row[NOC] or team in row[TEAM].split('/')) and year == row[YEAR]:
             if row[MEDAL] != 'NA':
@@ -18,7 +17,14 @@ def top_10_medals(header, rows, team, year):
                         if key == row[MEDAL]:
                             sportsman_dict[row[NAME]][key] += 1
                             sportsman_dict[row[NAME]]['total'] += 1
+                else:
+                    for key in sportsman_dict[row[NAME]]:
+                        if key == row[MEDAL]:
+                            sportsman_dict[row[NAME]][key] += 1
+                            sportsman_dict[row[NAME]]['total'] += 1
+    top_gold = max(sportsman_dict.items(), key=lambda x: x[1])[1]
     print(sportsman_dict)
+    print(top_gold)
 
 
 
