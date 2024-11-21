@@ -1,6 +1,5 @@
 import csv
-from lib2to3.pgen2.tokenize import group
-
+from medals import top_10_medals
 def open_file():
     with open("athlete_events.csv", "r") as file:
         reader = csv.reader(file)
@@ -14,3 +13,4 @@ categories, rows = open_file()
 
 if __name__ == '__main__':
     print(categories, rows[81])
+    top_10_medals()
