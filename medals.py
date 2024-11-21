@@ -9,17 +9,14 @@ def count_medals(medals_dict):
             total_silver += medals_dict[name]['Silver']
         else:
             total_bronze += medals_dict[name]['Bronze']
-
-    print(f'Total gold: {total_gold}, silver: {total_silver}, bronze: {total_bronze}')
-
+    print(f'Total gold medals for country: {total_gold}, silver: {total_silver}, bronze: {total_bronze}')
 
 def check_year(rows, year):
     valid_years = {row[9] for row in rows}
     if str(year) not in valid_years:
-        print('No olympics this year')
+        print('No Olympics this year')
         return False
     return True
-
 
 def check_country(rows, team):
     valid_teams = {row[6] for row in rows}
@@ -29,7 +26,6 @@ def check_country(rows, team):
         return False
     return True
 
-
 def top_10_medals(header, rows, team, year):
     NAME = header.index('Name')
     TEAM = header.index('Team')
@@ -37,13 +33,12 @@ def top_10_medals(header, rows, team, year):
     YEAR = header.index('Year')
     SPORT = header.index('Sport')
     MEDAL = header.index('Medal')
-
     sportsman_total = {}
     sportsman_medals = {}
     if not check_year(rows, year) or not check_country(rows, team):
         exit()
     for row in rows:
-        if (team == row[TEAM] or team == row[NOC] or team in row[TEAM].split('/')) and year == row[YEAR]:
+        if (team == row[TEAM] or team == row[NOC] or team in row[TEAM].split('/')) and str(year) == row[YEAR]:
             if row[MEDAL] != 'NA':
                 if row[NAME] not in sportsman_medals:
                     sportsman_medals[row[NAME]] = {'Discipline': None}
@@ -58,7 +53,7 @@ def top_10_medals(header, rows, team, year):
     top_10 = sorted(sportsman_total.items(), key=lambda x: x[1], reverse=True)[:10]
     print(f"Top 10 sportsmen for {team} in {year}:")
     for result in top_10:
-        print(result[0])
+        print(f"{top_10.index(result) + 1}) {result[0]}")
         for key, value in sportsman_medals[result[0]].items():
             print(f'   {key}: {value}')
     count_medals(sportsman_medals)

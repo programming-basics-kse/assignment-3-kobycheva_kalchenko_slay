@@ -1,6 +1,7 @@
 import csv
 import argparse
 from medals import top_10_medals
+from total import total
 
 def open_file():
     with open("athlete_events.csv", "r") as file:
@@ -24,5 +25,7 @@ args = parser.parse_args()
 if __name__ == '__main__':
     if args.medals:
         top_10_medals(categories, rows, args.medals[0], args.medals[1])
+    elif args.total:
+        total(categories, rows, args.total[0])
 
 
