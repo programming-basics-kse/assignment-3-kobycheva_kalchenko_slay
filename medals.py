@@ -10,6 +10,7 @@ def count_medals(medals_dict):
         else:
             total_bronze += medals_dict[name]['Bronze']
     print(f'Total gold medals for country: {total_gold}, silver: {total_silver}, bronze: {total_bronze}')
+    return f'Total gold medals for country: {total_gold}, silver: {total_silver}, bronze: {total_bronze}'
 
 def check_year(rows, year):
     valid_years = {row[9] for row in rows}
@@ -59,5 +60,5 @@ def top_10_medals(header, rows, team, year):
         for key, value in sportsman_medals[result[0]].items():
             print(f'   {key}: {value}')
             output += f"{key}: {value}\n"
-    count_medals(sportsman_medals)
+    output += count_medals(sportsman_medals)
     return output
