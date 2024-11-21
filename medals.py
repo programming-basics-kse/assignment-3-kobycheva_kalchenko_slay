@@ -51,9 +51,13 @@ def top_10_medals(header, rows, team, year):
                     sportsman_total[row[NAME]] = 0
                 sportsman_total[row[NAME]] += 1
     top_10 = sorted(sportsman_total.items(), key=lambda x: x[1], reverse=True)[:10]
+    output = f"Top 10 sportsmen for {team} in {year}:\n"
     print(f"Top 10 sportsmen for {team} in {year}:")
     for result in top_10:
         print(f"{top_10.index(result) + 1}) {result[0]}")
+        output += f"{top_10.index(result) + 1}: {result[0]}\n"
         for key, value in sportsman_medals[result[0]].items():
             print(f'   {key}: {value}')
+            output += f"{key}: {value}\n"
     count_medals(sportsman_medals)
+    return output
