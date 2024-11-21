@@ -14,5 +14,8 @@ def total(header, rows, year):
                     total_medals_per_country[row[NOC]] = ''
                 if row[MEDAL] not in total_medals_per_country[row[NOC]]:
                     total_medals_per_country[row[NOC]] += f'{row[MEDAL]} - '
+    output = ''
     for key, value in total_medals_per_country.items():
         print(f"{key}: {value[:-3]}")
+        output += f"{key}: {value[:-3]}\n"
+    return output

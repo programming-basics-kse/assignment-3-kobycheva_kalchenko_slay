@@ -21,11 +21,19 @@ group.add_argument('--medals', nargs=2, help='top 10 medalists of selected count
 group.add_argument('--total', nargs=1, type=int, help='country medals in this year')
 parser.add_argument('--output', nargs=1, type=str, help='file to save output')
 args = parser.parse_args()
+result = None
 
 if __name__ == '__main__':
     if args.medals:
-        top_10_medals(categories, rows, args.medals[0], args.medals[1])
+        result = top_10_medals(categories, rows, args.medals[0], args.medals[1])
+
     elif args.total:
-        total(categories, rows, args.total[0])
+        result = total(categories, rows, args.total[0])
+
+
+
+    if args.output:
+        with open(args.output[0], 'w') as results_file:
+            results_file.write(result)
 
 
