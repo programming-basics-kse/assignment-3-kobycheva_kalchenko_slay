@@ -10,7 +10,8 @@ def count_medals(medals_dict):
         else:
             total_bronze += medals_dict[name]['Bronze']
     print(f'Total gold medals for country: {total_gold}, silver: {total_silver}, bronze: {total_bronze}')
-    return total_gold+total_silver+total_bronze, f'Total gold medals for country: {total_gold}, silver: {total_silver}, bronze: {total_bronze}'
+    return total_gold + total_silver + total_bronze, f'Total gold medals for country: {total_gold}, silver: {total_silver}, bronze: {total_bronze}'
+
 
 def check_year(rows, year):
     valid_years = {row[9] for row in rows}
@@ -19,6 +20,7 @@ def check_year(rows, year):
         return False
     return True
 
+
 def check_country(rows, team):
     valid_teams = {row[6] for row in rows}
     valid_nocs = {row[7] for row in rows}
@@ -26,6 +28,7 @@ def check_country(rows, team):
         return True
     print('This country does not exist')
     return False
+
 
 def top_10_medals(header, rows, team, year):
     NAME = header.index('Name')
