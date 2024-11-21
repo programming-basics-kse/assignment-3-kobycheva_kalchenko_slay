@@ -12,12 +12,14 @@ def count_medals(medals_dict):
 
     print(f'Total gold: {total_gold}, silver: {total_silver}, bronze: {total_bronze}')
 
+
 def check_year(rows, year):
     valid_years = {row[9] for row in rows}
     if str(year) not in valid_years:
         print('No olympics this year')
         return False
     return True
+
 
 def check_country(rows, team):
     valid_teams = {row[6] for row in rows}
@@ -26,8 +28,6 @@ def check_country(rows, team):
         print('This country does not exict')
         return False
     return True
-
-
 
 
 def top_10_medals(header, rows, team, year):
@@ -62,17 +62,3 @@ def top_10_medals(header, rows, team, year):
         for key, value in sportsman_medals[result[0]].items():
             print(f'   {key}: {value}')
     count_medals(sportsman_medals)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
