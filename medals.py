@@ -37,6 +37,7 @@ def top_10_medals(header, rows, team, year):
     YEAR = header.index('Year')
     SPORT = header.index('Sport')
     MEDAL = header.index('Medal')
+
     sportsman_total = {}
     sportsman_medals = {}
     if not check_year(rows, year) or not check_country(rows, team):
@@ -55,6 +56,7 @@ def top_10_medals(header, rows, team, year):
                     sportsman_total[row[NAME]] = 0
                 sportsman_total[row[NAME]] += 1
     top_10 = sorted(sportsman_total.items(), key=lambda x: x[1], reverse=True)[:10]
+    print(f"Top 10 sportsmen for {team} in {year}:")
     for result in top_10:
         print(result[0])
         for key, value in sportsman_medals[result[0]].items():
