@@ -1,6 +1,6 @@
 import csv
 import argparse
-from medals import top_10_medals
+from medals import top_10_medals, return_top_10_medals
 from total import total
 
 def open_file():
@@ -14,6 +14,7 @@ def open_file():
 
 categories, rows = open_file()
 
+
 parser = argparse.ArgumentParser()
 group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument('--medals', nargs=2, help='top 10 medalists of selected country')
@@ -25,7 +26,7 @@ result = None
 
 if __name__ == '__main__':
     if args.medals:
-        result = top_10_medals(categories, rows, args.medals[0], args.medals[1])
+        result = return_top_10_medals(categories, rows, args.medals[0], args.medals[1])
 
     elif args.total:
         result = total(categories, rows, args.total[0])
