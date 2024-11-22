@@ -1,3 +1,5 @@
+from validation import check_country, check_year, create_indexes
+
 def count_medals(medals_dict):
     total_gold = 0
     total_silver = 0
@@ -9,34 +11,10 @@ def count_medals(medals_dict):
             total_silver += medals_dict[name]['Silver']
         else:
             total_bronze += medals_dict[name]['Bronze']
-    print(f'Total gold medals for country: {total_gold}, silver: {total_silver}, bronze: {total_bronze}')
     return total_gold + total_silver + total_bronze, f'Total gold medals for country: {total_gold}, silver: {total_silver}, bronze: {total_bronze}'
 
-
-def check_year(rows, year):
-    valid_years = {row[9] for row in rows}
-    if str(year) not in valid_years:
-        print('No Olympics this year')
-        return False
-    return True
-
-
-def check_country(rows, team):
-    valid_teams = {row[6] for row in rows}
-    valid_nocs = {row[7] for row in rows}
-    if team in valid_teams or team in valid_nocs:
-        return True
-    print('This country does not exist')
-    return False
-
-
 def top_10_medals(header, rows, team, year):
-    NAME = header.index('Name')
-    TEAM = header.index('Team')
-    NOC = header.index('NOC')
-    YEAR = header.index('Year')
-    SPORT = header.index('Sport')
-    MEDAL = header.index('Medal')
+    NAME, TEAM, NOC, YEAR, SPORT, MEDAL = create_indexes(header)
     sportsman_total = {}
     sportsman_medals = {}
     if not check_year(rows, year) or not check_country(rows, team):
@@ -46,27 +24,28 @@ def top_10_medals(header, rows, team, year):
             if row[MEDAL] != 'NA':
                 if row[NAME] not in sportsman_medals:
                     sportsman_medals[row[NAME]] = {'Discipline': None}
-                    if row[MEDAL] not in sportsman_medals[row[NAME]]:
-                        sportsman_medals[row[NAME]][row[MEDAL]] = 1
-                    else:
-                        sportsman_medals[row[NAME]][row[MEDAL]] += 1
-                sportsman_medals[row[NAME]]['Discipline'] = row[SPORT]
+                if row[MEDAL] not in sportsman_medals[row[NAME]]:
+                    sportsman_medals[row[NAME]][row[MEDAL]] = 1
+                    sportsman_medals[row[NAME]]['Discipline'] = row[SPORT]
+                else:
+                    sportsman_medals[row[NAME]][row[MEDAL]] += 1
+                    sportsman_medals[row[NAME]]['Discipline'] += row[SPORT]
+
                 if row[NAME] not in sportsman_total:
                     sportsman_total[row[NAME]] = 0
                 sportsman_total[row[NAME]] += 1
 
     number_of_medals, total_count_output = count_medals(sportsman_medals)
     if number_of_medals < 10:
-        return f'Only {number_of_medals} medals of this country'
+        output = f'Only {number_of_medals} medals of this country'
+        print(output)
+        return output
     top_10 = sorted(sportsman_total.items(), key=lambda x: x[1], reverse=True)[:10]
     output = f"Top 10 sportsmen for {team} in {year}:\n"
-    print(f"Top 10 sportsmen for {team} in {year}:")
     for result in top_10:
-        print(f"{top_10.index(result) + 1}) {result[0]}")
         output += f"{top_10.index(result) + 1}: {result[0]}\n"
         for key, value in sportsman_medals[result[0]].items():
-            print(f'   {key}: {value}')
             output += f"{key}: {value}\n"
-    print(total_count_output)
     output += total_count_output
+    print(output)
     return output

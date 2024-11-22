@@ -1,9 +1,7 @@
-from medals import check_year
+from validation import check_year, create_indexes
 
 def total(header, rows, year):
-    NOC = header.index('NOC')
-    YEAR = header.index('Year')
-    MEDAL = header.index('Medal')
+    NAME, TEAM, NOC, YEAR, SPORT, MEDAL = create_indexes(header)
     total_medals_per_country = {}
     if not check_year(rows, year):
         exit()
