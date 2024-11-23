@@ -1,7 +1,8 @@
 import csv
 import argparse
-from medals import top_10_medals, return_top_10_medals
+from medals import creating_dicts, return_top_10_medals
 from total import total
+from overall import overall
 
 def open_file():
     with open("athlete_events.csv", "r") as file:
@@ -32,7 +33,7 @@ if __name__ == '__main__':
         result = total(categories, rows, args.total[0])
 
     elif args.overall:
-        pass
+        result = overall(categories, rows, args.overall)
 
     if args.output:
         with open(args.output[0], 'w') as results_file:
