@@ -15,9 +15,9 @@ def overall_create_dict(header, rows, teams):
                         medals_by_years[team][row[YEAR]] = 1
                     else:
                         medals_by_years[team][row[YEAR]] += 1
-        return medals_by_years
+    return medals_by_years
 
-def overall_count_overall(medals_by_years):
+def count_overall(medals_by_years):
     output = ""
     for team in medals_by_years:
         team_list = medals_by_years[team]

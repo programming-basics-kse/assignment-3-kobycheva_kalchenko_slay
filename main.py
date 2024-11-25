@@ -2,7 +2,7 @@ import csv
 import argparse
 from medals import return_top_10_medals
 from total import total
-from overall import overall
+from overall import count_overall
 from interactive import first_participation, interactive
 from validation import check_country
 
@@ -37,7 +37,7 @@ if __name__ == '__main__':
         result = total(categories, rows, args.total[0])
 
     elif args.overall:
-        result = overall(categories, rows, args.overall)
+        result = count_overall(categories, rows, args.overall)
 
     elif not args.interactive:
         args.interactive = input('Please, enter a country to get its statistics: ')
