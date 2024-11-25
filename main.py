@@ -7,6 +7,7 @@ from interactive import first_participation, interactive
 from validation import check_country
 
 
+
 def open_file():
     with open("athlete_events.csv", "r") as file:
         reader = csv.reader(file)
@@ -16,8 +17,8 @@ def open_file():
             rows.append(row)
     return header, rows
 
-
 categories, rows = open_file()
+
 
 parser = argparse.ArgumentParser()
 group = parser.add_mutually_exclusive_group(required=True)
