@@ -1,8 +1,6 @@
 import csv
 import argparse
-
-
-from medals import creating_dicts, return_top_10_medals
+from medals import return_top_10_medals
 from total import total
 from overall import overall
 from interactive import first_participation, interactive
