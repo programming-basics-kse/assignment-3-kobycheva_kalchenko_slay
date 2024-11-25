@@ -59,9 +59,9 @@ def average_number(header, rows, team, number_of_participation):
                 medals_dict[row[MEDAL]] = 1
             else:
                 medals_dict[row[MEDAL]] += 1
-    output = f'\nAverage number of Gold medals is {round(medals_dict['Gold'] / number_of_participation, 1)}'
-    output += f', Silver - {round(medals_dict['Silver'] / number_of_participation, 1)}'
-    output += f', Bronze - {round(medals_dict['Bronze'] / number_of_participation, 1)}'
+    output = f'\nAverage number of Gold medals is {round(medals_dict['Gold'] / number_of_participation)}'
+    output += f', Silver - {round(medals_dict['Silver'] / number_of_participation)}'
+    output += f', Bronze - {round(medals_dict['Bronze'] / number_of_participation)}'
     return output
 
 
