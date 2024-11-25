@@ -4,6 +4,7 @@ from medals import creating_dicts, return_top_10_medals
 from total import total
 from overall import overall
 
+
 def open_file():
     with open("athlete_events.csv", "r") as file:
         reader = csv.reader(file)
@@ -13,14 +14,15 @@ def open_file():
             rows.append(row)
     return header, rows
 
-categories, rows = open_file()
 
+categories, rows = open_file()
 
 parser = argparse.ArgumentParser()
 group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument('--medals', nargs=2, help='top 10 medalists of selected country')
 group.add_argument('--total', nargs=1, type=int, help='country medals in this year')
 group.add_argument('--overall', nargs='+', type=str, help='the most productive year for this country')
+group.add_argument('--interactive', nargs=0, help='country statistics')
 parser.add_argument('--output', nargs=1, type=str, help='file to save output')
 args = parser.parse_args()
 result = None
