@@ -1,8 +1,12 @@
 import csv
 import argparse
+
+
 from medals import creating_dicts, return_top_10_medals
 from total import total
 from overall import overall
+from interactive import first_participation, interactive
+from validation import check_country
 
 
 def open_file():
@@ -22,7 +26,7 @@ group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument('--medals', nargs=2, help='top 10 medalists of selected country')
 group.add_argument('--total', nargs=1, type=int, help='country medals in this year')
 group.add_argument('--overall', nargs='+', type=str, help='the most productive year for this country')
-group.add_argument('--interactive', nargs=0, help='country statistics')
+group.add_argument('--interactive', nargs='*', help='country statistics')
 parser.add_argument('--output', nargs=1, type=str, help='file to save output')
 args = parser.parse_args()
 result = None
@@ -36,6 +40,12 @@ if __name__ == '__main__':
 
     elif args.overall:
         result = overall(categories, rows, args.overall)
+
+    elif not args.interactive:
+        args.interactive = input('Please, enter a country to get its statistics: ')
+        while not check_country(rows, args.interactive):
+            args.interactive = input('Please, enter valid country to get its statistics: ')
+        result = interactive(categories, rows, args.interactive)
 
     if args.output:
         with open(args.output[0], 'w') as results_file:

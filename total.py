@@ -9,11 +9,12 @@ def total(header, rows, year):
         if row[YEAR] == str(year):
             if row[MEDAL] != 'NA':
                 if row[NOC] not in total_medals_per_country:
-                    total_medals_per_country[row[NOC]] = ''
-                if row[MEDAL] not in total_medals_per_country[row[NOC]]:
-                    total_medals_per_country[row[NOC]] += f'{row[MEDAL]} - '
+                    total_medals_per_country[row[NOC]] = f'{row[MEDAL]}'
+                else:
+                    if row[MEDAL] not in total_medals_per_country[row[NOC]]:
+                        total_medals_per_country[row[NOC]] += f' - {row[MEDAL]}'
     output = ''
-    for key, value in total_medals_per_country.items():
-        print(f"{key}: {value[:-3]}")
-        output += f"{key}: {value[:-3]}\n"
+    for noc, medals in total_medals_per_country.items():
+        output += f"{noc}: {medals}\n"
+    print(output)
     return output
