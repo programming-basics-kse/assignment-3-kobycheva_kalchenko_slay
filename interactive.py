@@ -1,5 +1,6 @@
 from validation import create_indexes
 
+
 def overall(header, rows, teams):
     NAME, TEAM, NOC, YEAR, SPORT, MEDAL = create_indexes(header)
     medals_by_years = {}
