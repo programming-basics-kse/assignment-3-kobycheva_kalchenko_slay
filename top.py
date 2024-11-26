@@ -30,7 +30,6 @@ def create_top_player_dict(header, rows, ages, sexes):
                                 sportsman_dict[sex][short_age][row[NAME]] += 1
     return sportsman_dict
 
-
 def best_participant(header, rows, player_list):
     age_categories, sexes = convert_input(player_list)
     player_medals_dict = create_top_player_dict(header, rows, age_categories, sexes)
