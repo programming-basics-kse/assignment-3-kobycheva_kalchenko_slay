@@ -23,7 +23,6 @@ def min_max_medals(header, rows, team):
 def first_participation(header, rows, team):
     NAME, TEAM, NOC, YEAR, SPORT, MEDAL = create_indexes(header)
     PLACE = header.index('City')
-    # sorted_years = sorted({row[YEAR] for row in rows})
     years_places_list = []
     for row in rows:
         if row[TEAM] == team:

@@ -17,10 +17,11 @@ def overall_create_dict(header, rows, teams):
                         medals_by_years[team][row[YEAR]] += 1
     return medals_by_years
 
-def count_overall(medals_by_years):
+def count_overall(header, rows, teams):
+    medals_dict = overall_create_dict(header, rows, teams)
     output = ""
-    for team in medals_by_years:
-        team_list = medals_by_years[team]
+    for team in medals_dict:
+        team_list = medals_dict[team]
         top_year = sorted(team_list.items(), key=lambda x: x[1], reverse=True)[:1]
         for key, value in top_year:
             output += f"The most successful year for {team} was {key} with {value} medals \n"
