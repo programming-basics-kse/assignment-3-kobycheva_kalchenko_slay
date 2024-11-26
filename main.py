@@ -25,6 +25,7 @@ group.add_argument('--medals', nargs=2, help='top 10 medalists of selected count
 group.add_argument('--total', nargs=1, type=int, help='country medals in this year')
 group.add_argument('--overall', nargs='+', type=str, help='the most productive year for this country')
 group.add_argument('--interactive', nargs='*', help='country statistics')
+group.add_argument('--top', nargs='+', type=str, help='top sportsmen in age categories for females or males')
 parser.add_argument('--output', nargs=1, type=str, help='file to save output')
 args = parser.parse_args()
 result = None
@@ -38,6 +39,9 @@ if __name__ == '__main__':
 
     elif args.overall:
         result = count_overall(categories, rows, args.overall)
+
+    elif args.top:
+        pass
 
     elif not args.interactive:
         args.interactive = input('Please, enter a country to get its statistics: ')

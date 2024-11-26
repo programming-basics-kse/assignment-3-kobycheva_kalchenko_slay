@@ -15,4 +15,4 @@ def check_country(rows, team):
     return False
 
 def create_indexes(header):
-    return header.index('Name'), header.index('Team'), header.index('NOC'), header.index('Year'), header.index('Sport'), header.index('Medal')
+    return header.index('Name'), header.index('Team'), header.index('NOC'), header.index('Year'), header.index('Sport'), header.index('Medal'), header.index('Sex'), header.index('Age')
